@@ -2,7 +2,6 @@
     <string name="app_name">Hangman</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
-    <string name="random_word">Songoku</string>
     <string name="test_word">Misses: </string>
     <string name="hello_world">Test</string>
     <string name="action_settings">Settings</string>

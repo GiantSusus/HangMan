@@ -1,28 +1,31 @@
 package com.hangman.root.hangman;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.ArrayList;
+
 import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
 
     /*
     *  TO DO!
-    *  1. small - capital characters
-    *  2. something doesn't word with game over
-    *  3. Create a word list and load the words randomly to the game
-    *  4. connect to mySql database
-    *  5. create login function
+    *  App logic:
+    *  1. small - capital characters: -> guessright
+    *  2. restrict the user input to only one letter: -> android:maxLength="10"
+    *  3. modify the function so that we can have spaces after the dashes
+    *  Database:
+    *  1. Create a word list and load the words randomly to the game
+    *  2. connect to mySql database
+    *  Web
+    *  1. create login function
     * */
 
     Button button;
@@ -44,6 +47,7 @@ public class MainActivity extends ActionBarActivity {
 
         misses = "";
         guessword = "Songoku";
+        guessword = guessword.toUpperCase();
 
         randomWord  = (TextView) findViewById(R.id.random_word);
         missWord = (TextView) findViewById(R.id.test_word);
@@ -87,12 +91,13 @@ public class MainActivity extends ActionBarActivity {
     void guessRight(View v) {
 
         letter = editText.getText().charAt(0);
+        letter = Character.toUpperCase(letter);
 
         if (alreadyUsed(letter)) return;
 
         for (int i = 0; i < guessword.length(); i++) {
             if (guessword.charAt(i) == letter) {
-                status.setCharAt(i, letter);
+                status.setCharAt(i*2, letter);
             }
         }
         randomWord.setText(status + "");
@@ -100,7 +105,7 @@ public class MainActivity extends ActionBarActivity {
 
         if (letterNotInWord(letter)) return;
 
-        Toast.makeText(this, "The length: " + status.length(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "The length: " + status.length(), Toast.LENGTH_SHORT).show();
         if (guessword.equals(status + ""))
             gameOver(true);
     }
