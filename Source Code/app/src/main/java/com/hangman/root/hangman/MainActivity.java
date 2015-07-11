@@ -11,6 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
@@ -46,7 +51,19 @@ public class MainActivity extends ActionBarActivity {
         //System.out.println("----------------" + "\n" + "some" + "\n" +"----------------" );
 
         misses = "";
-        guessword = "Songoku";
+
+        try {
+            InputStream is = getResources().openRawResource(R.raw.words);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            guessword = reader.readLine();
+            reader.close();
+        } catch(MalformedURLException e) {
+            //Do something with the exception.
+        } catch(IOException e2) {
+            //Do something with the exception.
+        }
+
+
         guessword = guessword.toUpperCase();
 
         // number of guesses the player has
