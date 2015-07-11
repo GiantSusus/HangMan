@@ -24,8 +24,29 @@
         android:text="@string/button_send" />
 
     <TextView
-        android:id="@+id/test_word"
-        android:text="@string/test_word"
+        android:id="@+id/miss_label"
+        android:text="@string/Misses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/missed_words"
+        android:text="@string/missed_words"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/guessesLeft_label"
+        android:text="@string/guessesLeft_Label_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/guessesLeft"
+        android:text="@string/guessesLeft_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp" />

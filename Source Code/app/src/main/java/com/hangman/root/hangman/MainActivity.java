@@ -29,12 +29,12 @@ public class MainActivity extends ActionBarActivity {
     * */
 
     Button button;
-    TextView randomWord, missWord;
+    TextView randomWord, missLabel, missWord, guessesLeft_label, guessesLeft;
     EditText editText;
     String guessword, misses;
     char letter;
     StringBuilder status = new StringBuilder();
-    Random rand = new Random();
+    //Random rand = new Random();
     int guesses;
 
     @Override
@@ -49,10 +49,18 @@ public class MainActivity extends ActionBarActivity {
         guessword = "Songoku";
         guessword = guessword.toUpperCase();
 
+        // number of guesses the player has
+        guesses = 10;
+
         randomWord  = (TextView) findViewById(R.id.random_word);
-        missWord = (TextView) findViewById(R.id.test_word);
+        missLabel = (TextView) findViewById(R.id.miss_label);
+        missWord = (TextView) findViewById(R.id.missed_words);
+        guessesLeft_label = (TextView) findViewById(R.id.guessesLeft_label);
+        guessesLeft = (TextView) findViewById(R.id.guessesLeft);
         editText = (EditText) findViewById(R.id.edit_text1);
         button = (Button) findViewById(R.id.button1);
+
+        guessesLeft.setText(guesses + "");
 
         generate_dash();
 
@@ -140,12 +148,17 @@ public class MainActivity extends ActionBarActivity {
             return false;
 
         misses += letter + " ";
+        guesses -= 1;
 
         // update  misses textView
         missWord.setText(misses);
+        guessesLeft.setText(guesses + "");
 
         editText.setText("");
         // if no more guesses are left, you lost
+        if (guesses == 0)
+            gameOver(false);
+
         return true;
     }
 
